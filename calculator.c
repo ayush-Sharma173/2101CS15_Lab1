@@ -17,6 +17,7 @@ int main()
     printf("\nEnter 2 for substraction (num1-num2) ");
     printf("\nEnter 3 for Multiplication ");
     printf("\nEnter 4 for Division (num1/num2) ");
+    printf("\nEnter 5 for Modulo operation ");
     printf("\n\n");
     scanf("%d",&operation);
     printf("\nYour answer is : ");
@@ -40,6 +41,11 @@ int main()
     {
         printf("%d\n",num1/num2);
     }
+     if(operation==5)
+    {
+        printf("%d\n",num1%num2);
+    }
+
     
     return 0;
 }
