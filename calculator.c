@@ -13,13 +13,18 @@ int main()
     
     int operation;
     printf("\nPlease provide the operation you need to perform :\n");
-    printf("\nEnter 1 for Additon \n");
-
+    printf("\nEnter 1 for Additon ");
+    printf("\nEnter 2 for substraction (num1-num2) \n");
+    printf("\n");
     scanf("%d",&operation);
     printf("\nYour answer is : ");
     if(operation==1)
     {
         printf("%d\n",num1+num2);
+    }
+    if(operation==2)
+    {
+        printf("%d\n",num1-num2);
     }
 
 }
