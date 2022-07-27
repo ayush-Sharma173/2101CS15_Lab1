@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+int main()
+{
+    int num1,num2;
+    
+    printf("\n    :: This is your Calculator ::\n\n");
+    printf("Enter number 1 - ");
+    scanf("%d",&num1);
+    
+    printf("Enter number 2 - ");
+    scanf("%d",&num2);
+    
+    int operation;
+    printf("\nPlease provide the operation you need to perform :\n");
+    printf("\nEnter 1 for Additon \n");
+
+    scanf("%d",&operation);
+    printf("\nYour answer is : ");
+    if(operation==1)
+    {
+        printf("%d\n",num1+num2);
+    }
+
+}
