@@ -3,6 +3,11 @@
 int n, array[1000], c, d, t, flag = 0, position;
 int re=1;
 
+
+// ----------------------------------------------------------------------------
+// x--------------------------------insertion sort--------------------------------x
+// ----------------------------------------------------------------------------
+
 void insertion_sort()
 {
     for (c = 1 ; c <= n - 1; c++) 
@@ -25,6 +30,57 @@ void insertion_sort()
     }
 }
 
+
+// ----------------------------------------------------------------------------
+// x--------------------------------selection sort-----------------------------x
+// ----------------------------------------------------------------------------
+
+void selection_sort()
+{
+    for (c = 0; c < (n - 1); c++) // finding minimum element (n-1) times
+  {
+    position = c;
+
+    for (d = c + 1; d < n; d++)
+    {
+      if (array[position] > array[d])
+        position = d;
+    }
+    if (position != c)
+    {
+      t = array[c];
+      array[c] = array[position];
+      array[position] = t;
+    }
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// x--------------------------------bubble sort--------------------------------x
+// ----------------------------------------------------------------------------
+
+void bubble_sort()
+{
+    int swap;
+    for (c = 0 ; c < n - 1; c++)
+    {
+        for (d = 0 ; d < n - c - 1; d++)
+        {
+            if (array[d] > array[d+1]) /* For decreasing order use '<' instead of '>' */
+            {
+                swap       = array[d];
+                array[d]   = array[d+1];
+                array[d+1] = swap;
+            }
+        }
+    }
+}
+
+
+// ----------------------------------------------------------------------------
+// x--------------------------------merge sort--------------------------------x
+// ----------------------------------------------------------------------------
 
 void merge(int p, int q, int r) {
 
@@ -74,14 +130,14 @@ void merge(int p, int q, int r) {
 }
 
 // Divide the array into two subarrays, sort them and merge them
-void mergeSort(int l, int r) {
+void merge_sort(int l, int r) {
   if (l < r) {
 
     // m is the point where the array is divided into two subarrays
     int m = l + (r - l) / 2;
 
-    mergeSort(l, m);
-    mergeSort(m + 1, r);
+    merge_sort(l, m);
+    merge_sort(m + 1, r);
 
     // Merge the sorted subarrays
     merge(l, m, r);
@@ -89,50 +145,66 @@ void mergeSort(int l, int r) {
 }
 
 
+// ----------------------------------------------------------------------------
+// x--------------------------------quick sort--------------------------------x
+// ----------------------------------------------------------------------------
 
-void selection_sort()
-{
-    for (c = 0; c < (n - 1); c++) // finding minimum element (n-1) times
-  {
-    position = c;
-
-    for (d = c + 1; d < n; d++)
-    {
-      if (array[position] > array[d])
-        position = d;
-    }
-    if (position != c)
-    {
-      t = array[c];
-      array[c] = array[position];
-      array[position] = t;
-    }
-  }
+// function to swap elements
+void swap(int *a, int *b) {
+  int t = *a;
+  *a = *b;
+  *b = t;
 }
 
+// function to find the partition position
+int partition(int low, int high) {
+  
+  // select the rightmost element as pivot
+  int pivot = array[high];
+  
+  // pointer for greater element
+  int i = (low - 1);
 
-void bubble_sort()
-{
-    int swap;
-    for (c = 0 ; c < n - 1; c++)
-    {
-        for (d = 0 ; d < n - c - 1; d++)
-        {
-            if (array[d] > array[d+1]) /* For decreasing order use '<' instead of '>' */
-            {
-                swap       = array[d];
-                array[d]   = array[d+1];
-                array[d+1] = swap;
-            }
-        }
+  // traverse each element of the array
+  // compare them with the pivot
+  for (int j = low; j < high; j++) {
+    if (array[j] <= pivot) {
+        
+      // if element smaller than pivot is found
+      // swap it with the greater element pointed by i
+      i++;
+      
+      // swap element at i with element at j
+      swap(&array[i], &array[j]);
     }
+  }
+
+  // swap the pivot element with the greater element at i
+  swap(&array[i + 1], &array[high]);
+  
+  // return the partition point
+  return (i + 1);
+}
+
+void quick_sort(int low, int high) {
+  if (low < high) {
+    
+    // find the pivot element such that
+    // elements smaller than pivot are on left of pivot
+    // elements greater than pivot are on right of pivot
+    int pi = partition(low, high);
+    
+    // recursive call on the left of pivot
+    quick_sort(low, pi - 1);
+    
+    // recursive call on the right of pivot
+    quick_sort(pi + 1, high);
+  }
 }
 
 
 int main()
 {
-    while (re)
-    {
         printf("Enter number of elements\n");
         scanf("%d", &n);
 
@@ -140,12 +212,15 @@ int main()
 
         for (c = 0; c < n; c++)
             scanf("%d", &array[c]);
+    while (re)
+    {
 
         printf("Which sorting algotithm you want to apply ?\n");
         printf("\nPress 1 for insertion sort");
         printf("\nPress 2 for selection sort");
         printf("\nPress 3 for bubble sort");
         printf("\nPress 4 for merge sort");
+        printf("\nPress 5 for quick sort");
             printf("\n\n");
             int algo;
 
@@ -173,8 +248,14 @@ int main()
 
             if(algo==4)
             {
-                mergeSort(0,n-1);
+                merge_sort(0,n-1);
                 printf("Sorted list in ascending order (using merge sort):\n");
+            }
+
+            if(algo==5)
+            {
+                quick_sort(0,n-1);
+                printf("Sorted list in ascending order (using quick sort):\n");
             }
 
         for (c = 0; c <= n - 1; c++) {
