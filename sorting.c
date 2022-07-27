@@ -25,6 +25,7 @@ void insertion_sort()
     }
 }
 
+
 void selection_sort()
 {
     for (c = 0; c < (n - 1); c++) // finding minimum element (n-1) times
@@ -45,6 +46,25 @@ void selection_sort()
   }
 }
 
+
+void bubble_sort()
+{
+    int swap;
+    for (c = 0 ; c < n - 1; c++)
+    {
+        for (d = 0 ; d < n - c - 1; d++)
+        {
+            if (array[d] > array[d+1]) /* For decreasing order use '<' instead of '>' */
+            {
+                swap       = array[d];
+                array[d]   = array[d+1];
+                array[d+1] = swap;
+            }
+        }
+    }
+}
+
+
 int main()
 {
     while (re)
@@ -60,10 +80,13 @@ int main()
         printf("Which sorting algotithm you want to apply ?\n");
         printf("\nPress 1 for insertion sort");
         printf("\nPress 2 for selection sort");
+        printf("\nPress 3 for bubble sort");
             printf("\n\n");
             int algo;
 
             scanf("%d",&algo);
+
+            printf("\n");
 
             if(algo==1)
             {
@@ -77,7 +100,11 @@ int main()
                 printf("Sorted list in ascending order (using selection sort):\n");
             }
             
-
+            if(algo==3)
+            {
+                bubble_sort();
+                printf("Sorted list in ascending order (using bubble sort):\n");
+            }
 
         for (c = 0; c <= n - 1; c++) {
             printf("%d\n", array[c]);
